@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech-Archaeology: From Digital Relics to Hidden Value</title>
+  <meta name="description" content="An international eTwinning project exploring e-waste, digital archaeology, and sustainable future." />
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg-dark: #090e17;
+      --card-bg: #111a28;
+      --card-border: #1c2b42;
+      --accent-cyan: #00d2ff;
+      --accent-green: #10b981;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(9, 14, 23, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    nav {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 0.5rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.88rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-links a.active {
+      color: var(--accent-cyan);
+      background: rgba(0, 210, 255, 0.1);
+      font-weight: 600;
+    }
+
+    .lang-switcher {
+      display: flex;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 0.3rem 0.65rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+      color: #000;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1250px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .page-section {
+      display: none;
+      animation: fadeIn 0.35s ease forwards;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-banner-container {
+      margin-bottom: 2rem;
+    }
+
+    .hero-banner-container img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 210, 255, 0.12);
+      border: 1px solid var(--card-border);
+      display: block;
+    }
+
+    .counter-strip {
+      background: linear-gradient(90deg, rgba(0, 210, 255, 0.08), rgba(16, 185, 129, 0.08));
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .counter-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .counter-label i {
+      color: var(--accent-cyan);
+      font-size: 1.1rem;
+    }
+
+    .counter-odometer {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #06090e;
+      border: 1px solid var(--card-border);
+      padding: 0.35rem 0.8rem;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--accent-green);
+      letter-spacing: 2px;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .home-hero-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .home-hero-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--accent-cyan);
+    }
+
+    .home-hero-text p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .stat-badge {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      padding: 1.2rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-badge strong {
+      display: block;
+      font-size: 1.4rem;
+      color: var(--accent-green);
+    }
+
+    .stat-badge span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .quick-cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+      color: #000;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 25px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 25px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Pre-Test Box */
+    .pretest-wrapper {
+      background: linear-gradient(145deg, #0e1522, #141d2d);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .pretest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .pretest-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.6rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .pretest-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-cyan);
+    }
+
+    .pretest-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .pretest-card h4 {
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .pretest-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.4rem;
+    }
+
+    /* 6 School & Teachers */
+    .teachers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .teacher-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .teacher-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-cyan);
+    }
+
+    .teacher-avatar-box {
+      width: 65px;
+      height: 65px;
+      min-width: 65px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(16, 185, 129, 0.2));
+      border: 2px solid var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: var(--text-main);
+    }
+
+    .teacher-details h4 {
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 0.1rem;
+    }
+
+    .teacher-role {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.2rem;
+      display: block;
+    }
+
+    .teacher-school {
+      font-size: 0.88rem;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .teacher-location {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Pillars */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .pillar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 1.8rem 1.2rem;
+      border-radius: 16px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .pillar-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(0, 210, 255, 0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--accent-cyan);
+      margin-bottom: 1rem;
+    }
+
+    .pillar-card:nth-child(even) .pillar-icon {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent-green);
+    }
+
+    .pillar-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Padlet Cards */
+    .padlet-community-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .padlet-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+    }
+
+    .padlet-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-cyan);
+    }
+
+    .padlet-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .padlet-icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: rgba(0, 210, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--accent-cyan);
+    }
+
+    .padlet-card:nth-child(2) .padlet-icon-box {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent-green);
+    }
+
+    .padlet-card:nth-child(3) .padlet-icon-box {
+      background: rgba(255, 184, 0, 0.1);
+      color: #ffb800;
+    }
+
+    .padlet-card-title h3 {
+      font-size: 1.15rem;
+      color: #fff;
+    }
+
+    .padlet-card-title span {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+    }
+
+    .padlet-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .padlet-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.75rem 1.2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .padlet-link-btn:hover {
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+      color: #000;
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .partner-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 1.3rem;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .partner-flag {
+      font-size: 2rem;
+    }
+
+    .partner-info h4 {
+      font-size: 1rem;
+      color: var(--text-main);
+    }
+
+    .partner-info p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Roadmap */
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .timeline-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-green);
+    }
+
+    .month-badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: rgba(0, 210, 255, 0.12);
+      color: var(--accent-cyan);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(0, 210, 255, 0.2);
+    }
+
+    .timeline-card:nth-child(even) .month-badge {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--accent-green);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    .timeline-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
+    }
+
+    .tool-tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tool-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      padding: 0.3rem 0.65rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    /* Outcomes */
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .outcome-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+    }
+
+    .outcome-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-cyan);
+    }
+
+    .outcome-card h3 {
+      font-size: 1.2rem;
+      margin: 1rem 0 0.5rem;
+      color: #fff;
+    }
+
+    .outcome-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .outcome-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0, 210, 255, 0.1);
+      color: var(--accent-cyan);
+      border: 1px solid var(--accent-cyan);
+      padding: 0.55rem 1.2rem;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      align-self: flex-start;
+    }
+
+    .outcome-btn:hover {
+      background: var(--accent-cyan);
+      color: #000;
+    }
+
+    /* eSafety */
+    .esafety-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 2.2rem;
+    }
+
+    .esafety-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .esafety-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.3rem;
+    }
+
+    .esafety-item i {
+      font-size: 1.5rem;
+      color: var(--accent-green);
+      margin-bottom: 0.8rem;
+    }
+
+    .esafety-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .esafety-item p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .contact-info, .contact-links {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .contact-info h3, .contact-links h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--accent-cyan);
+    }
+
+    .contact-info p {
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-info i {
+      color: var(--accent-cyan);
+      width: 24px;
+    }
+
+    .quick-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.9rem 1.2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+      cursor: pointer;
+    }
+
+    .quick-links a:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    footer {
+      border-top: 1px solid var(--card-border);
+      background: #06090e;
+      text-align: center;
+      padding: 2.2rem 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    footer .etwinning-tag {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+    }
+
+    @media (max-width: 950px) {
+      .nav-links { display: none; }
+      .home-hero-box, .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav>
+      <div class="logo" onclick="switchTab('home')">
+        <i class="fa-solid fa-microchip"></i> Tech-Archaeology
+      </div>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a class="nav-item active" data-tab="home" onclick="switchTab('home')" data-i18n="nav_home">Home</a></li>
+          <li><a class="nav-item" data-tab="about" onclick="switchTab('about')" data-i18n="nav_about">About</a></li>
+          <li><a class="nav-item" data-tab="partners" onclick="switchTab('partners')" data-i18n="nav_partners">Partners</a></li>
+          <li><a class="nav-item" data-tab="roadmap" onclick="switchTab('roadmap')" data-i18n="nav_roadmap">Roadmap & Activities</a></li>
+          <li><a class="nav-item" data-tab="outcomes" onclick="switchTab('outcomes')" data-i18n="nav_outcomes">Outcomes</a></li>
+          <li><a class="nav-item" data-tab="esafety" onclick="switchTab('esafety')" data-i18n="nav_esafety">eSafety</a></li>
+          <li><a class="nav-item" data-tab="contact" onclick="switchTab('contact')" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+        <div class="lang-switcher">
+          <button class="lang-btn active" id="btn-en" onclick="setLanguage('en')">EN</button>
+          <button class="lang-btn" id="btn-tr" onclick="setLanguage('tr')">TR</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- TAB 1: HOME -->
+    <section id="tab-home" class="page-section active">
+      <!-- Live Visitor Counter -->
+      <div class="counter-strip">
+        <div class="counter-label">
+          <i class="fa-solid fa-users-viewfinder"></i>
+          <span data-i18n="counter_title">Total Project Portal Visits:</span>
+        </div>
+        <div class="counter-odometer">
+          <i class="fa-solid fa-eye" style="font-size: 0.9rem; margin-right: 5px; color: var(--accent-cyan);"></i>
+          <span id="visitor-count">001428</span>
+        </div>
+      </div>
+
+      <!-- Banner -->
+      <div class="hero-banner-container">
+        <img src="banner.png" alt="Tech-Archaeology Banner" />
+      </div>
+
+      <!-- Hero Summary Box -->
+      <div class="home-hero-box">
+        <div class="home-hero-text">
+          <h3 data-i18n="home_hero_title">Uncovering Tomorrow in Yesterday's Tech</h3>
+          <p data-i18n="home_hero_p">
+            Welcome to the official portal of <strong>Tech-Archaeology</strong>. An international eTwinning initiative 
+            connecting students across Europe to dissect obsolete technology, investigate electronic waste, and co-create circular solutions.
+          </p>
+          <div class="quick-cta-row">
+            <button class="btn-primary" onclick="switchTab('roadmap')">
+              <span data-i18n="cta_roadmap">Explore Roadmap</span> <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="btn-secondary" onclick="switchTab('outcomes')">
+              <span data-i18n="cta_outcomes">View Outcomes</span>
+            </button>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-badge">
+            <strong data-i18n="stat1_num">4 Months</strong>
+            <span data-i18n="stat1_txt">Active Collaboration</span>
+          </div>
+          <div class="stat-badge">
+            <strong data-i18n="stat2_num">3D & AI</strong>
+            <span data-i18n="stat2_txt">Digital Integration</span>
+          </div>
+          <div class="stat-badge">
+            <strong data-i18n="stat3_num">Upcycling</strong>
+            <span data-i18n="stat3_txt">Creative Reuse</span>
+          </div>
+          <div class="stat-badge">
+            <strong data-i18n="stat4_num">Impact</strong>
+            <span data-i18n="stat4_txt">School E-Waste Drive</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRE-TEST HUB (Anketler) -->
+      <div class="pretest-wrapper">
+        <div class="section-title" style="margin-bottom: 1.5rem;">
+          <h2 data-i18n="pretest_title">Baseline Evaluation & Surveys</h2>
+          <p data-i18n="pretest_subtitle">Please participate in our project pre-surveys to help shape our environmental inquiry</p>
+        </div>
+
+        <div class="pretest-grid">
+          <!-- Parents Pre-Survey -->
+          <div class="pretest-card">
+            <div>
+              <div class="pretest-icon" style="color: var(--accent-cyan);"><i class="fa-solid fa-people-roof"></i></div>
+              <h4 data-i18n="pt_p_title">Parents Pre-Survey</h4>
+              <p data-i18n="pt_p_desc">Evaluating household electronic waste habits, disposal awareness, and recycling practices.</p>
+            </div>
+            <a href="https://forms.gle/Z3a7F47Wr3yAyrn96" target="_blank" class="btn-primary" style="justify-content: center; width: 100%;">
+              <span data-i18n="survey_btn">Fill Survey</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <!-- Teachers Pre-Survey -->
+          <div class="pretest-card">
+            <div>
+              <div class="pretest-icon" style="color: var(--accent-green);"><i class="fa-solid fa-chalkboard-user"></i></div>
+              <h4 data-i18n="pt_t_title">Teachers Pre-Survey</h4>
+              <p data-i18n="pt_t_desc">Assessing pedagogical readiness, interdisciplinary STEAM integration, and digital tool adoption.</p>
+            </div>
+            <a href="https://forms.gle/buRTUzELasFuVtrZ7" target="_blank" class="btn-primary" style="justify-content: center; width: 100%; background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));">
+              <span data-i18n="survey_btn">Fill Survey</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <!-- Students Pre-Survey -->
+          <div class="pretest-card">
+            <div>
+              <div class="pretest-icon" style="color: #ffb800;"><i class="fa-solid fa-user-graduate"></i></div>
+              <h4 data-i18n="pt_s_title">Students Pre-Survey</h4>
+              <p data-i18n="pt_s_desc">Measuring student perceptions on e-waste lifecycles, circular economy, and hardware curiosity.</p>
+            </div>
+            <a href="https://forms.gle/buRTUzELasFuVtrZ7" target="_blank" class="btn-primary" style="justify-content: center; width: 100%; background: linear-gradient(90deg, #ffb800, #ff8c00);">
+              <span data-i18n="survey_btn">Fill Survey</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 Schools & 6 Teachers Cards -->
+      <div class="section-title">
+        <h2 data-i18n="home_team_title">Coordinating Schools & Lead Educators</h2>
+        <p data-i18n="home_team_subtitle">The transnational pedagogical team spearheading Tech-Archaeology</p>
+      </div>
+
+      <div class="teachers-grid">
+        <div class="teacher-card">
+          <div class="teacher-avatar-box"><i class="fa-solid fa-user-graduate"></i></div>
+          <div class="teacher-details">
+            <span class="teacher-role" data-i18n="t_founder">Founder / Coordinator</span>
+            <h4>Mediha T. 🇹🇷</h4>
+            <div class="teacher-school">Haydarpaşa Lisesi</div>
+            <div class="teacher-location"><i class="fa-solid fa-location-dot"></i> Istanbul, Türkiye</div>
+          </div>
+        </div>
+
+        <div class="teacher-card">
+          <div class="teacher-avatar-box"><i class="fa-solid fa-user-tie"></i></div>
+          <div class="teacher-details">
+            <span class="teacher-role" data-i18n="t_cofounder">Co-Founder / Partner</span>
+            <h4>Amelia S. 🇷🇴</h4>
+            <div class="teacher-school">Colegiul Național „Mihai Eminescu”</div>
+            <div class="teacher-location"><i class="fa-solid fa-location-dot"></i> Oradea, Romania</div>
+          </div>
+        </div>
+
+        <div class="teacher-card">
+          <div class="teacher-avatar-box"><i class="fa-solid fa-user-gear"></i></div>
+          <div class="teacher-details">
+            <span class="teacher-role" data-i18n="t_tech">Tech Lead / Partner</span>
+            <h4>Julija F. 🇸🇮</h4>
+            <div class="teacher-school">Tehniški šolski center</div>
+            <div class="teacher-location"><i class="fa-solid fa-location-dot"></i> Maribor, Slovenia</div>
+          </div>
+        </div>
+
+        <div class="teacher-card">
+          <div class="teacher-avatar-box"><i class="fa-solid fa-laptop-code"></i></div>
+          <div class="teacher-details">
+            <span class="teacher-role" data-i18n="t_steam">STEAM Partner</span>
+            <h4>Jasna B. 🇷🇸</h4>
+            <div class="teacher-school">Elektrotehnička škola Nikola Tesla</div>
+            <div class="teacher-location"><i class="fa-solid fa-location-dot"></i> Pančevo, Serbia</div>
+          </div>
+        </div>
+
+        <div class="teacher-card">
+          <div class="teacher-avatar-box"><i class="fa-solid fa-microchip"></i></div>
+          <div class="teacher-details">
+            <span class="teacher-role" data-i18n="t_eco">Eco-Innovation Partner</span>
+            <h4>Diana M. 🇵🇹</h4>
+            <div class="teacher-school">Partner Vocational School</div>
+            <div class="teacher-location"><i class="fa-solid fa-location-dot"></i> Porto, Portugal</div>
+          </div>
+        </div>
+
+        <div class="teacher-card">
+          <div class="teacher-avatar-box"><i class="fa-solid fa-flask-vial"></i></div>
+          <div class="teacher-details">
+            <span class="teacher-role" data-i18n="t_sci">Coordinating Partner</span>
+            <h4>Görkem T. 🇹🇷</h4>
+            <div class="teacher-school">TVF Spor Lisesi</div>
+            <div class="teacher-location"><i class="fa-solid fa-location-dot"></i> Ankara / Istanbul, Türkiye</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: ABOUT -->
+    <section id="tab-about" class="page-section">
+      <div class="section-title">
+        <h2 data-i18n="about_title">About the Project</h2>
+        <p data-i18n="about_subtitle">Merging STEAM education, electronic archaeology, and environmental action</p>
+      </div>
+
+      <div class="home-hero-box" style="margin-bottom: 3rem;">
+        <div class="home-hero-text" style="grid-column: 1 / -1;">
+          <h3 data-i18n="about_box_title">Yesterday's Tech, Tomorrow's Potential</h3>
+          <p data-i18n="about_p1">
+            In an accelerating digital world, discarded electronics pile up as forgotten digital relics. 
+            <strong>Tech-Archaeology</strong> challenges students to investigate the lifecycle of hardware, 
+            dissect internal components, and champion circular economy mindsets through cross-border collaboration.
+          </p>
+          <p data-i18n="about_p2">
+            Merging STEAM education, 3D photogrammetry, and environmental advocacy, our young innovators uncover the hidden value inside e-waste.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <h2 data-i18n="pillars_title">Five Action Pillars</h2>
+        <p data-i18n="pillars_subtitle">Pedagogical foundation guiding our project outcomes</p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3 data-i18n="p1_title">Explore the Past</h3>
+          <p data-i18n="p1_desc">Examining the evolution of circuitry, obsolete standards, and retro hardware.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon"><i class="fa-solid fa-lightbulb"></i></div>
+          <h3 data-i18n="p2_title">Investigate Present</h3>
+          <p data-i18n="p2_desc">Auditing personal digital footprints and raw electronic consumption rates.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon"><i class="fa-solid fa-recycle"></i></div>
+          <h3 data-i18n="p3_title">Find Hidden Value</h3>
+          <p data-i18n="p3_desc">Extracting components, upcycling parts, and crafting circular artistic outputs.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon"><i class="fa-solid fa-users"></i></div>
+          <h3 data-i18n="p4_title">Learn Together</h3>
+          <p data-i18n="p4_desc">Cross-border teams tackling shared eco-technological design briefs.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon"><i class="fa-solid fa-earth-europe"></i></div>
+          <h3 data-i18n="p5_title">Sustainable Future</h3>
+          <p data-i18n="p5_desc">Inspiring proactive green consumer habits and school-wide e-waste collection.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: PARTNERS -->
+    <section id="tab-partners" class="page-section">
+      <div class="section-title">
+        <h2 data-i18n="partners_title">Partner Community & Network</h2>
+        <p data-i18n="partners_subtitle">Meet the teachers, students, and schools shaping our transnational journey</p>
+      </div>
+
+      <div class="padlet-community-grid">
+        <div class="padlet-card">
+          <div>
+            <div class="padlet-card-header">
+              <div class="padlet-icon-box"><i class="fa-solid fa-chalkboard-user"></i></div>
+              <div class="padlet-card-title">
+                <span data-i18n="padlet_badge_team">Mentors & Leaders</span>
+                <h3 data-i18n="padlet_teachers_title">Meet Our Teachers</h3>
+              </div>
+            </div>
+            <p data-i18n="padlet_teachers_desc">Explore educator bios, pedagogical goals, subject areas, and international collaboration messages across partner schools.</p>
+          </div>
+          <a href="https://padlet.com/medihatbk/meet-our-teachers-tech-archaeology-s023g2taq9ay7byf3bls" target="_blank" class="padlet-link-btn">
+            <span data-i18n="padlet_btn_teachers">Open Teachers Padlet</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+
+        <div class="padlet-card">
+          <div>
+            <div class="padlet-card-header">
+              <div class="padlet-icon-box"><i class="fa-solid fa-user-group"></i></div>
+              <div class="padlet-card-title">
+                <span data-i18n="padlet_badge_students">Young Innovators</span>
+                <h3 data-i18n="padlet_students_title">Meet Our Students</h3>
+              </div>
+            </div>
+            <p data-i18n="padlet_students_desc">Discover avatars, introductions, e-waste perspectives, and intercultural greetings prepared by our student participants.</p>
+          </div>
+          <a href="https://padlet.com/medihatbk/meet-our-students-tech-archaeology-s023g3nfatrn4lup2r0e" target="_blank" class="padlet-link-btn">
+            <span data-i18n="padlet_btn_students">Open Students Padlet</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+
+        <div class="padlet-card">
+          <div>
+            <div class="padlet-card-header">
+              <div class="padlet-icon-box"><i class="fa-solid fa-school-flag"></i></div>
+              <div class="padlet-card-title">
+                <span data-i18n="padlet_badge_schools">European Network</span>
+                <h3 data-i18n="padlet_schools_title">Meet Our Partner Schools</h3>
+              </div>
+            </div>
+            <p data-i18n="padlet_schools_desc">Take a tour through participating campuses, facilities, school cultures, and our shared international community wall.</p>
+          </div>
+          <a href="https://padlet.com/medihatbk/our-international-community-s0238n10c3lgov7f13y1" target="_blank" class="padlet-link-btn">
+            <span data-i18n="padlet_btn_schools">Open Schools Padlet</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top: 1rem; margin-bottom: 1.5rem; text-align: left;">
+        <h3 style="font-size: 1.3rem; color: var(--accent-cyan);" data-i18n="schools_list_title">Institutional Partner Directory</h3>
+      </div>
+
+      <div class="partners-grid">
+        <div class="partner-card">
+          <span class="partner-flag">🇹🇷</span>
+          <div class="partner-info">
+            <h4>Haydarpaşa Lisesi</h4>
+            <p data-i18n="hl_info">Istanbul, Türkiye (Founding School)</p>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">🇷🇴</span>
+          <div class="partner-info">
+            <h4>Colegiul Național „Mihai Eminescu”</h4>
+            <p>Oradea, Romania</p>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">🇸🇮</span>
+          <div class="partner-info">
+            <h4>Tehniški šolski center</h4>
+            <p>Maribor, Slovenia</p>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">🇷🇸</span>
+          <div class="partner-info">
+            <h4>ETŠ Nikola Tesla</h4>
+            <p>Pančevo, Serbia</p>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">🇵🇹</span>
+          <div class="partner-info">
+            <h4 data-i18n="pt_school">Partner Vocational School</h4>
+            <p>Porto, Portugal</p>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">🇹🇷</span>
+          <div class="partner-info">
+            <h4>TVF Spor Lisesi</h4>
+            <p>Ankara / Istanbul, Türkiye</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: ROADMAP & ACTIVITIES -->
+    <section id="tab-roadmap" class="page-section">
+      <div class="section-title">
+        <h2 data-i18n="roadmap_title">Roadmap & Key Activities</h2>
+        <p data-i18n="roadmap_subtitle">Structured 4-month collaborative STEAM agenda</p>
+      </div>
+
+      <div class="timeline-grid">
+        <div class="timeline-card">
+          <div>
+            <span class="month-badge"><i class="fa-regular fa-calendar"></i> <span data-i18n="m1_badge">Month 1 • Nov</span></span>
+            <h3 data-i18n="m1_title">Digital Excavation & Disassembly</h3>
+            <p data-i18n="m1_desc">Students step into the shoes of digital archaeologists, taking apart broken hardware to inspect internal anatomy and building a physical/virtual 'Tech Museum'.</p>
+          </div>
+          <div class="tool-tag-container">
+            <span class="tool-tag"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-i18n="m1_t1">Hardware Anatomy</span></span>
+            <span class="tool-tag"><i class="fa-solid fa-box-archive"></i> <span data-i18n="m1_t2">Tech Museum</span></span>
+          </div>
+        </div>
+
+        <div class="timeline-card">
+          <div>
+            <span class="month-badge"><i class="fa-regular fa-calendar"></i> <span data-i18n="m2_badge">Month 2 • Dec</span></span>
+            <h3 data-i18n="m2_title">E-Waste & Upcycling Art</h3>
+            <p data-i18n="m2_desc">International mixed squads repurpose electronic components into collaborative sculptures, digitized via modern 3D scanning workflows.</p>
+          </div>
+          <div class="tool-tag-container">
+            <span class="tool-tag"><i class="fa-solid fa-cube"></i> Polycam</span>
+            <span class="tool-tag"><i class="fa-solid fa-palette"></i> Canvas</span>
+            <span class="tool-tag"><i class="fa-solid fa-people-arrows"></i> <span data-i18n="m2_t1">Mixed Teams</span></span>
+          </div>
+        </div>
+
+        <div class="timeline-card">
+          <div>
+            <span class="month-badge"><i class="fa-regular fa-calendar"></i> <span data-i18n="m3_badge">Month 3 • Jan</span></span>
+            <h3 data-i18n="m3_title">AI & Eco-Tech Hackathon</h3>
+            <p data-i18n="m3_desc">Students craft targeted generative AI prompts to design sustainable hardware for 2050, accompanied by a structured Digital Detox challenge.</p>
+          </div>
+          <div class="tool-tag-container">
+            <span class="tool-tag"><i class="fa-solid fa-robot"></i> <span data-i18n="m3_t1">AI Prompting</span></span>
+            <span class="tool-tag"><i class="fa-solid fa-leaf"></i> <span data-i18n="m3_t2">Eco-Design</span></span>
+            <span class="tool-tag"><i class="fa-solid fa-mobile-screen"></i> <span data-i18n="m3_t3">Digital Detox</span></span>
+          </div>
+        </div>
+
+        <div class="timeline-card">
+          <div>
+            <span class="month-badge"><i class="fa-regular fa-calendar"></i> <span data-i18n="m4_badge">Month 4 • Feb</span></span>
+            <h3 data-i18n="m4_title">Virtual Gallery & Local Impact</h3>
+            <p data-i18n="m4_desc">Curating an interactive 3D virtual exhibition to showcase student projects, paired with a concrete school-wide e-waste collection campaign.</p>
+          </div>
+          <div class="tool-tag-container">
+            <span class="tool-tag"><i class="fa-solid fa-vr-cardboard"></i> Spatial</span>
+            <span class="tool-tag"><i class="fa-solid fa-image"></i> Artsteps</span>
+            <span class="tool-tag"><i class="fa-solid fa-recycle"></i> <span data-i18n="m4_t1">E-Waste Drive</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: OUTCOMES -->
+    <section id="tab-outcomes" class="page-section">
+      <div class="section-title">
+        <h2 data-i18n="outcomes_title">Collaborative Outcomes & Products</h2>
+        <p data-i18n="outcomes_subtitle">Tangible results co-created by transnational student teams</p>
+      </div>
+
+      <div class="outcomes-grid">
+        <div class="outcome-card">
+          <div>
+            <i class="fa-solid fa-vr-cardboard" style="font-size: 2.2rem; color: var(--accent-cyan);"></i>
+            <h3 data-i18n="out1_title">3D Virtual Museum & Gallery</h3>
+            <p data-i18n="out1_desc">An immersive exhibition built in Spatial/Artsteps featuring 3D scanned electronic sculptures created by international student squads.</p>
+          </div>
+          <a href="#" class="outcome-btn"><span data-i18n="out_explore">Explore Virtual Gallery</span> <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="outcome-card">
+          <div>
+            <i class="fa-solid fa-book-open" style="font-size: 2.2rem; color: var(--accent-green);"></i>
+            <h3 data-i18n="out2_title">Collaborative Eco-Tech E-Book</h3>
+            <p data-i18n="out2_desc">A comprehensive digital guide compiling student research on e-waste lifecycle, teardown guides, and AI-generated sustainable tech concepts.</p>
+          </div>
+          <a href="#" class="outcome-btn"><span data-i18n="out_read">Read E-Book</span> <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="outcome-card">
+          <div>
+            <i class="fa-solid fa-chart-pie" style="font-size: 2.2rem; color: var(--accent-cyan);"></i>
+            <h3 data-i18n="out3_title">E-Waste Impact Report & Drive</h3>
+            <p data-i18n="out3_desc">Summary infographics, collection metrics, and environmental footprint calculations from partner schools' joint e-waste campaign.</p>
+          </div>
+          <a href="#" class="outcome-btn"><span data-i18n="out_view">View Drive Results</span> <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: eSAFETY -->
+    <section id="tab-esafety" class="page-section">
+      <div class="esafety-box">
+        <div class="section-title" style="margin-bottom: 1.5rem; text-align: left;">
+          <h2 data-i18n="esafety_title">eSafety & Netiquette Protocols</h2>
+          <p data-i18n="esafety_subtitle">Strict adherence to European digital safety, privacy, and ethics standards</p>
+        </div>
+
+        <div class="esafety-grid">
+          <div class="esafety-item">
+            <i class="fa-solid fa-user-shield"></i>
+            <h4 data-i18n="es1_title">Student Privacy & Consent</h4>
+            <p data-i18n="es1_desc">Parental consent forms obtained for all participating students. Full names and identifiable facial images are strictly protected.</p>
+          </div>
+          <div class="esafety-item">
+            <i class="fa-solid fa-copyright"></i>
+            <h4 data-i18n="es2_title">Copyright & Fair Use</h4>
+            <p data-i18n="es2_desc">All materials, images, and audio utilized adhere to Creative Commons licensing with proper intellectual attribution.</p>
+          </div>
+          <div class="esafety-item">
+            <i class="fa-solid fa-comments"></i>
+            <h4 data-i18n="es3_title">TwinSpace Netiquette</h4>
+            <p data-i18n="es3_desc">Inclusive, respectful, and moderated student interactions across forums, live chats, and collaborative boards.</p>
+          </div>
+          <div class="esafety-item">
+            <i class="fa-solid fa-brain"></i>
+            <h4 data-i18n="es4_title">Responsible AI Ethics</h4>
+            <p data-i18n="es4_desc">Critical analysis of AI outputs, emphasizing algorithmic bias, digital carbon footprint, and original human creativity.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 7: CONTACT -->
+    <section id="tab-contact" class="page-section">
+      <div class="section-title">
+        <h2 data-i18n="contact_title">Contact & Hub</h2>
+        <p data-i18n="contact_subtitle">Connect with our project coordination team</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3 data-i18n="c_coord_title">Project Coordination</h3>
+          <p><i class="fa-solid fa-school"></i> <strong>School:</strong> Haydarpaşa Lisesi</p>
+          <p><i class="fa-solid fa-location-dot"></i> <strong>Location:</strong> Altunizade, Üsküdar / İstanbul, Türkiye</p>
+          <p><i class="fa-solid fa-envelope"></i> <strong>Contact:</strong> etwinning@haydarpasalisesi.k12.tr</p>
+          <p><i class="fa-solid fa-certificate"></i> <strong>Label:</strong> eTwinning School Label 2026-2027</p>
+        </div>
+
+        <div class="contact-links">
+          <h3 data-i18n="c_links_title">Official Links</h3>
+          <div class="quick-links">
+            <a href="https://school-education.ec.europa.eu" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="link_twinspace">TwinSpace Project Portal</span>
+            </a>
+            <a href="https://haydarpasalisesi.meb.k12.tr" target="_blank">
+              <i class="fa-solid fa-globe"></i> <span data-i18n="link_school">Haydarpaşa Lisesi Official Web</span>
+            </a>
+            <a onclick="switchTab('home')">
+              <i class="fa-solid fa-arrow-left"></i> <span data-i18n="link_back_home">Return to Home</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Tech-Archaeology eTwinning Project. All rights reserved.</p>
+    <div class="etwinning-tag" data-i18n="footer_tag">Together for a Sustainable Europe • eTwinning Community</div>
+  </footer>
+
+  <!-- Scripts: Tabs, Counter & Multi-Language -->
+  <script>
+    let currentLang = 'en';
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(link => link.classList.remove('active'));
+
+      const targetSection = document.getElementById('tab-' + tabId);
+      if (targetSection) {
+        targetSection.classList.add('active');
+      }
+
+      const activeNav = document.querySelector(`.nav-item[data-tab="${tabId}"]`);
+      if (activeNav) {
+        activeNav.classList.add('active');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function initVisitorCounter() {
+      const counterEl = document.getElementById('visitor-count');
+      let visits = localStorage.getItem('tech_arch_visits');
+      if (!visits) {
+        visits = 1428;
+      } else {
+        visits = parseInt(visits, 10) + 1;
+      }
+      localStorage.setItem('tech_arch_visits', visits);
+      counterEl.innerText = visits.toString().padStart(6, '0');
+    }
+
+    const translations = {
+      en: {
+        nav_home: "Home",
+        nav_about: "About",
+        nav_partners: "Partners",
+        nav_roadmap: "Roadmap & Activities",
+        nav_outcomes: "Outcomes",
+        nav_esafety: "eSafety",
+        nav_contact: "Contact",
+        counter_title: "Total Project Portal Visits:",
+        home_hero_title: "Uncovering Tomorrow in Yesterday's Tech",
+        home_hero_p: "Welcome to the official portal of <strong>Tech-Archaeology</strong>. An international eTwinning initiative connecting students across Europe to dissect obsolete technology, investigate electronic waste, and co-create circular solutions.",
+        cta_roadmap: "Explore Roadmap",
+        cta_outcomes: "View Outcomes",
+        stat1_num: "4 Months",
+        stat1_txt: "Active Collaboration",
+        stat2_num: "3D & AI",
+        stat2_txt: "Digital Integration",
+        stat3_num: "Upcycling",
+        stat3_txt: "Creative Reuse",
+        stat4_num: "Impact",
+        stat4_txt: "School E-Waste Drive",
+        pretest_title: "Baseline Evaluation & Surveys",
+        pretest_subtitle: "Please participate in our project pre-surveys to help shape our environmental inquiry",
+        pt_p_title: "Parents Pre-Survey",
+        pt_p_desc: "Evaluating household electronic waste habits, disposal awareness, and recycling practices.",
+        pt_t_title: "Teachers Pre-Survey",
+        pt_t_desc: "Assessing pedagogical readiness, interdisciplinary STEAM integration, and digital tool adoption.",
+        pt_s_title: "Students Pre-Survey",
+        pt_s_desc: "Measuring student perceptions on e-waste lifecycles, circular economy, and hardware curiosity.",
+        survey_btn: "Fill Survey",
+        home_team_title: "Coordinating Schools & Lead Educators",
+        home_team_subtitle: "The transnational pedagogical team spearheading Tech-Archaeology",
+        t_founder: "Founder / Coordinator",
+        t_cofounder: "Co-Founder / Partner",
+        t_tech: "Tech Lead / Partner",
+        t_steam: "STEAM Partner",
+        t_eco: "Eco-Innovation Partner",
+        t_sci: "Coordinating Partner",
+        about_title: "About the Project",
+        about_subtitle: "Merging STEAM education, electronic archaeology, and environmental action",
+        about_box_title: "Yesterday's Tech, Tomorrow's Potential",
+        about_p1: "In an accelerating digital world, discarded electronics pile up as forgotten digital relics. <strong>Tech-Archaeology</strong> challenges students to investigate the lifecycle of hardware, dissect internal components, and champion circular economy mindsets through cross-border collaboration.",
+        about_p2: "Merging STEAM education, 3D photogrammetry, and environmental advocacy, our young innovators uncover the hidden value inside e-waste.",
+        pillars_title: "Five Action Pillars",
+        pillars_subtitle: "Pedagogical foundation guiding our project outcomes",
+        p1_title: "Explore the Past",
+        p1_desc: "Examining the evolution of circuitry, obsolete standards, and retro hardware.",
+        p2_title: "Investigate Present",
+        p2_desc: "Auditing personal digital footprints and raw electronic consumption rates.",
+        p3_title: "Find Hidden Value",
+        p3_desc: "Extracting components, upcycling parts, and crafting circular artistic outputs.",
+        p4_title: "Learn Together",
+        p4_desc: "Cross-border teams tackling shared eco-technological design briefs.",
+        p5_title: "Sustainable Future",
+        p5_desc: "Inspiring proactive green consumer habits and school-wide e-waste collection.",
+        partners_title: "Partner Community & Network",
+        partners_subtitle: "Meet the teachers, students, and schools shaping our transnational journey",
+        padlet_badge_team: "Mentors & Leaders",
+        padlet_teachers_title: "Meet Our Teachers",
+        padlet_teachers_desc: "Explore educator bios, pedagogical goals, subject areas, and international collaboration messages across partner schools.",
+        padlet_btn_teachers: "Open Teachers Padlet",
+        padlet_badge_students: "Young Innovators",
+        padlet_students_title: "Meet Our Students",
+        padlet_students_desc: "Discover avatars, introductions, e-waste perspectives, and intercultural greetings prepared by our student participants.",
+        padlet_btn_students: "Open Students Padlet",
+        padlet_badge_schools: "European Network",
+        padlet_schools_title: "Meet Our Partner Schools",
+        padlet_schools_desc: "Take a tour through participating campuses, facilities, school cultures, and our shared international community wall.",
+        padlet_btn_schools: "Open Schools Padlet",
+        schools_list_title: "Institutional Partner Directory",
+        hl_info: "Istanbul, Türkiye (Founding School)",
+        pt_school: "Partner Vocational School",
+        roadmap_title: "Roadmap & Key Activities",
+        roadmap_subtitle: "Structured 4-month collaborative STEAM agenda",
+        m1_badge: "Month 1 • Nov",
+        m1_title: "Digital Excavation & Disassembly",
+        m1_desc: "Students step into the shoes of digital archaeologists, taking apart broken hardware to inspect internal anatomy and building a physical/virtual 'Tech Museum'.",
+        m1_t1: "Hardware Anatomy",
+        m1_t2: "Tech Museum",
+        m2_badge: "Month 2 • Dec",
+        m2_title: "E-Waste & Upcycling Art",
+        m2_desc: "International mixed squads repurpose electronic components into collaborative sculptures, digitized via modern 3D scanning workflows.",
+        m2_t1: "Mixed Teams",
+        m3_badge: "Month 3 • Jan",
+        m3_title: "AI & Eco-Tech Hackathon",
+        m3_desc: "Students craft targeted generative AI prompts to design sustainable hardware for 2050, accompanied by a structured Digital Detox challenge.",
+        m3_t1: "AI Prompting",
+        m3_t2: "Eco-Design",
+        m3_t3: "Digital Detox",
+        m4_badge: "Month 4 • Feb",
+        m4_title: "Virtual Gallery & Local Impact",
+        m4_desc: "Curating an interactive 3D virtual exhibition to showcase student projects, paired with a concrete school-wide e-waste collection campaign.",
+        m4_t1: "E-Waste Drive",
+        outcomes_title: "Collaborative Outcomes & Products",
+        outcomes_subtitle: "Tangible results co-created by transnational student teams",
+        out1_title: "3D Virtual Museum & Gallery",
+        out1_desc: "An immersive exhibition built in Spatial/Artsteps featuring 3D scanned electronic sculptures created by international student squads.",
+        out_explore: "Explore Virtual Gallery",
+        out2_title: "Collaborative Eco-Tech E-Book",
+        out2_desc: "A comprehensive digital guide compiling student research on e-waste lifecycle, teardown guides, and AI-generated sustainable tech concepts.",
+        out_read: "Read E-Book",
+        out3_title: "E-Waste Impact Report & Drive",
+        out3_desc: "Summary infographics, collection metrics, and environmental footprint calculations from partner schools' joint e-waste campaign.",
+        out_view: "View Drive Results",
+        esafety_title: "eSafety & Netiquette Protocols",
+        esafety_subtitle: "Strict adherence to European digital safety, privacy, and ethics standards",
+        es1_title: "Student Privacy & Consent",
+        es1_desc: "Parental consent forms obtained for all participating students. Full names and identifiable facial images are strictly protected.",
+        es2_title: "Copyright & Fair Use",
+        es2_desc: "All materials, images, and audio utilized adhere to Creative Commons licensing with proper intellectual attribution.",
+        es3_title: "TwinSpace Netiquette",
+        es3_desc: "Inclusive, respectful, and moderated student interactions across forums, live chats, and collaborative boards.",
+        es4_title: "Responsible AI Ethics",
+        es4_desc: "Critical analysis of AI outputs, emphasizing algorithmic bias, digital carbon footprint, and original human creativity.",
+        contact_title: "Contact & Hub",
+        contact_subtitle: "Connect with our project coordination team",
+        c_coord_title: "Project Coordination",
+        c_links_title: "Official Links",
+        link_twinspace: "TwinSpace Project Portal",
+        link_school: "Haydarpaşa Lisesi Official Web",
+        link_back_home: "Return to Home",
+        footer_tag: "Together for a Sustainable Europe • eTwinning Community"
+      },
+      tr: {
+        nav_home: "Ana Sayfa",
+        nav_about: "Hakkında",
+        nav_partners: "Ortaklar",
+        nav_roadmap: "Yol Haritası ve Etkinlikler",
+        nav_outcomes: "Çıktılar",
+        nav_esafety: "e-Güvenlik",
+        nav_contact: "İletişim",
+        counter_title: "Toplam Proje Portalı Ziyareti:",
+        home_hero_title: "Dünün Teknolojisinde Yarını Keşfetmek",
+        home_hero_p: "<strong>Tech-Archaeology</strong> resmi web portalına hoş geldiniz. Avrupa genelindeki öğrencileri eski donanımları demonte etmeye, e-atıkları araştırmaya ve döngüsel çözümler üretmeye teşvik eden uluslararası bir eTwinning girişimi.",
+        cta_roadmap: "Yol Haritasını İncele",
+        cta_outcomes: "Çıktıları Gör",
+        stat1_num: "4 Ay",
+        stat1_txt: "Aktif İş Birliği",
+        stat2_num: "3D ve Yapay Zeka",
+        stat2_txt: "Dijital Entegrasyon",
+        stat3_num: "İleri Dönüşüm",
+        stat3_txt: "Yaratıcı Yeniden Kullanım",
+        stat4_num: "Sosyal Etki",
+        stat4_txt: "E-Atık Kampanyası",
+        pretest_title: "Temel Değerlendirme ve Ön Testler",
+        pretest_subtitle: "Çevresel araştırmamıza katkı sağlamak için lütfen anketlerimizi doldurunuz",
+        pt_p_title: "Veli Ön Testi",
+        pt_p_desc: "Evdeki e-atık alışkanlıklarını, bertaraf farkındalığını ve geri dönüşüm pratiklerini ölçme.",
+        pt_t_title: "Öğretmen Ön Testi",
+        pt_t_desc: "Pedagojik hazırlık, disiplinler arası STEAM entegrasyonu ve dijital araç kullanımını değerlendirme.",
+        pt_s_title: "Öğrenci Ön Testi",
+        pt_s_desc: "Öğrencilerin e-atık döngüsü, döngüsel ekonomi ve donanım merakı algılarını ölçme.",
+        survey_btn: "Anketi Doldur",
+        home_team_title: "Koordinatör Okullar ve Lider Eğitimciler",
+        home_team_subtitle: "Tech-Archaeology projesine yön veren uluslararası pedagojik ekip",
+        t_founder: "Kurucu / Koordinatör",
+        t_cofounder: "Kurucu Ortak",
+        t_tech: "Teknoloji Sorumlusu",
+        t_steam: "STEAM Ortağı",
+        t_eco: "Eko-İnovasyon Ortağı",
+        t_sci: "Koordinatör Ortak",
+        about_title: "Proje Hakkında",
+        about_subtitle: "STEAM eğitimi, elektronik arkeolojisi ve çevresel eylemin birleşimi",
+        about_box_title: "Dünün Teknolojisi, Yarının Potansiyeli",
+        about_p1: "Hızla dijitalleşen dünyada ıskartaya çıkan donanımlar unutulmuş dijital kalıntılara dönüşüyor. <strong>Tech-Archaeology</strong>, öğrencileri elektronik cihazların yaşam döngüsünü araştırmaya, bileşenleri incelemeye ve uluslararası iş birliğiyle döngüsel ekonomi bilinci geliştirmeye davet ediyor.",
+        about_p2: "STEAM eğitimi, 3D fotogrametri ve çevre savunuculuğunu harmanlayan genç mucitlerimiz, elektronik atıkların içindeki gizli değeri gün yüzüne çıkarıyor.",
+        pillars_title: "Beş Eylem İlkesi",
+        pillars_subtitle: "Proje hedeflerimize rehberlik eden pedagojik çerçeve",
+        p1_title: "Geçmişi Keşfet",
+        p1_desc: "Devrelerin, eski bağlantı standartlarının ve nostaljik cihazların evrimini inceleme.",
+        p2_title: "Bugünü Araştır",
+        p2_desc: "Bireysel dijital ayak izini ve ham elektronik tüketim oranlarını analiz etme.",
+        p3_title: "Gizli Değeri Bul",
+        p3_desc: "Bileşenleri ayırma, parçaları dönüştürme ve sanatsal döngüsel çıktılar üretme.",
+        p4_title: "Birlikte Öğren",
+        p4_desc: "Uluslararası ekipler halinde ortak eko-teknolojik tasarım hedeflerini tamamlama.",
+        p5_title: "Sürdürülebilir Gelecek",
+        p5_desc: "Bilinçli tüketici alışkanlıkları ve okul çapında e-atık toplama kültürü oluşturma.",
+        partners_title: "Ortak Topluluğumuz ve Ağ",
+        partners_subtitle: "Uluslararası yolculuğumuza güç katan öğretmenlerimiz, öğrencilerimiz ve okullarımız",
+        padlet_badge_team: "Rehberler ve Koordinatörler",
+        padlet_teachers_title: "Öğretmenlerimizle Tanışın",
+        padlet_teachers_desc: "Ortak okullardaki öğretmenlerin biyografilerini, branşlarını, pedagojik hedeflerini ve iş birliği mesajlarını inceleyin.",
+        padlet_btn_teachers: "Öğretmenler Padlet'ini Aç",
+        padlet_badge_students: "Genç Kaşifler",
+        padlet_students_title: "Öğrencilerimizle Tanışın",
+        padlet_students_desc: "Katılımcı öğrencilerin avatarlarını, kendilerini tanıtan paylaşımlarını, e-atık bakış açılarını ve selamlarını keşfedin.",
+        padlet_btn_students: "Öğrenciler Padlet'ini Aç",
+        padlet_badge_schools: "Avrupa Ağı",
+        padlet_schools_title: "Ortak Okullarımızı Tanıyın",
+        padlet_schools_desc: "Projeye dahil olan okul kampüslerini, eğitim ortamlarını, kültürel zenginlikleri ve uluslararası topluluk panomuzu gezin.",
+        padlet_btn_schools: "Okullar Padlet'ini Aç",
+        schools_list_title: "Kurumsal Ortaklar Rehberi",
+        hl_info: "İstanbul, Türkiye (Kurucu Okul)",
+        pt_school: "Ortak Meslek Lisesi",
+        roadmap_title: "Yol Haritası ve Temel Etkinlikler",
+        roadmap_subtitle: "4 aylık yapılandırılmış, işbirlikçi STEAM takvimi",
+        m1_badge: "1. Ay • Kasım",
+        m1_title: "Dijital Kazı ve Parçalara Ayırma",
+        m1_desc: "Öğrenciler dijital arkeolog rolünü üstlenerek atıl donanımları demonte eder, iç donanımı inceler ve okul bünyesinde fiziksel/sanal bir 'Teknoloji Müzesi' kurar.",
+        m1_t1: "Donanım Anatomisi",
+        m1_t2: "Teknoloji Müzesi",
+        m2_badge: "2. Ay • Aralık",
+        m2_title: "E-Atık ve İleri Dönüşüm Sanatı",
+        m2_desc: "Uluslararası karma öğrenci ekipleri elektronik parçaları heykellere dönüştürür ve bunları modern 3D tarama yöntemleriyle dijital ortama aktarır.",
+        m2_t1: "Karma Takımlar",
+        m3_badge: "3. Ay • Ocak",
+        m3_title: "Yapay Zeka ve Eko-Teknoloji Hackathonu",
+        m3_desc: "Öğrenciler üretken yapay zeka komutları (prompt) ile 2050'nin sürdürülebilir cihazlarını tasarlar; eş zamanlı olarak okul çapında Dijital Detoks süreci uygulanır.",
+        m3_t1: "Yapay Zeka Tasarımı",
+        m3_t2: "Eko-Tasarım",
+        m3_t3: "Dijital Detoks",
+        m4_badge: "4. Ay • Şubat",
+        m4_title: "Sanal Galeri ve Yerel Etki",
+        m4_desc: "Öğrenci üretimlerinin sergilendiği etkileşimli bir 3D sanal sergi açılır ve okullar arası somut e-atık toplama kampanyası yürütülür.",
+        m4_t1: "E-Atık Kampanyası",
+        outcomes_title: "İş Birlikçi Çıktılar ve Ortak Ürünler",
+        outcomes_subtitle: "Uluslararası öğrenci takımlarının birlikte ürettiği somut sonuçlar",
+        out1_title: "3D Sanal Müze ve Galeri",
+        out1_desc: "Uluslararası karma ekiplerce üretilen ve 3D taranan heykel çalışmalarının yer aldığı etkileşimli Spatial/Artsteps sergi alanı.",
+        out_explore: "Sanal Galeriyi Gez",
+        out2_title: "Ortak Eko-Teknoloji E-Kitabı",
+        out2_desc: "Öğrencilerin e-atık araştırmalarını, donanım söküm kılavuzlarını ve yapay zeka eko-tasarımlarını toplayan kapsamlı dijital kitap.",
+        out_read: "E-Kitabı Oku",
+        out3_title: "E-Atık Etki Raporu ve Kampanya",
+        out3_desc: "Ortak okulların yürüttüğü e-atık toplama seferberliğinin infografikleri, geri dönüşüm metrikleri ve çevresel etki verileri.",
+        out_view: "Sonuçları İncele",
+        esafety_title: "e-Güvenlik ve Dijital Etik Kuralları",
+        esafety_subtitle: "Avrupa dijital güvenlik, veri gizliliği ve etik standartlarına tam uyum",
+        es1_title: "Öğrenci Gizliliği ve Veli İzinleri",
+        es1_desc: "Katılımcı tüm öğrenciler için veli izin belgeleri alınmıştır. Tam isimler ve ayırt edici yüz fotoğrafları özenle korunur.",
+        es2_title: "Telif Hakları ve Adil Kullanım",
+        es2_desc: "Kullanılan tüm görsel, ses ve yazılı materyaller Creative Commons lisanslarına ve akademik atıf kurallarına uygundur.",
+        es3_title: "TwinSpace İletişim Etiği",
+        es3_desc: "Forum ve canlı oturumlarda karşılıklı saygıya, kültürel çeşitliliğe dayalı ve öğretmen moderasyonlu güvenli etkileşim.",
+        es4_title: "Sorumlu Yapay Zeka İlkeleri",
+        es4_desc: "Yapay zeka çıktılarının doğruluğu, algoritmik önyargı, dijital karbon ayak izi ve insan yaratıcılığının önceliği vurgulanır.",
+        contact_title: "İletişim ve Bilgi",
+        contact_subtitle: "Proje koordinasyon ekibimizle iletişime geçin",
+        c_coord_title: "Proje Koordinasyonu",
+        c_links_title: "Resmi Bağlantılar",
+        link_twinspace: "TwinSpace Proje Alanı",
+        link_school: "Haydarpaşa Lisesi Resmi Web Sitesi",
+        link_back_home: "Ana Sayfaya Dön",
+        footer_tag: "Sürdürülebilir Bir Avrupa İçin Birlikte • eTwinning Topluluğu"
+      }
+    };
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const elements = document.querySelectorAll('[data-i18n]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
+      document.documentElement.lang = lang;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initVisitorCounter();
+    });
+  </script>
+
+</body>
+</html>
