@@ -872,6 +872,7 @@
           <li><a class="nav-item" data-tab="about" onclick="switchTab('about')" data-i18n="nav_about">About</a></li>
           <li><a class="nav-item" data-tab="partners" onclick="switchTab('partners')" data-i18n="nav_partners">Partners</a></li>
           <li><a class="nav-item" data-tab="roadmap" onclick="switchTab('roadmap')" data-i18n="nav_roadmap">Roadmap</a></li>
+          <li><a class="nav-item" data-tab="activities" onclick="switchTab('activities')" data-i18n="nav_activities">Activities</a></li>
           <li><a class="nav-item" data-tab="outcomes" onclick="switchTab('outcomes')" data-i18n="nav_outcomes">Outcomes</a></li>
           <li><a class="nav-item" data-tab="blog" onclick="switchTab('blog')" data-i18n="nav_blog">Student Blog</a></li>
           <li><a class="nav-item" data-tab="esafety" onclick="switchTab('esafety')" data-i18n="nav_esafety">eSafety</a></li>
@@ -914,8 +915,8 @@
             <button class="btn-primary" onclick="switchTab('roadmap')">
               <span data-i18n="cta_roadmap">Explore Roadmap</span> <i class="fa-solid fa-arrow-right"></i>
             </button>
-            <button class="btn-secondary" onclick="switchTab('blog')">
-              <span data-i18n="cta_blog">Student Blog & Forum</span>
+            <button class="btn-secondary" onclick="switchTab('activities')">
+              <span data-i18n="cta_activities">Project Activities</span>
             </button>
           </div>
         </div>
@@ -1292,6 +1293,26 @@
       </div>
     </section>
 
+    <!-- TAB: ACTIVITIES (YENİ EKLENEN AKTİVİTELER BÖLÜMÜ) -->
+    <section id="tab-activities" class="page-section">
+      <div class="section-title">
+        <h2 data-i18n="activities_title">Project Activities & Actions</h2>
+        <p data-i18n="activities_subtitle">Documenting workshops, teardown sessions, and student actions in real-time</p>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 1.2rem;">
+        <a href="https://padlet.com/medihatbk/tech-archaeology-activities-s0243imuokbn5661pcvk" target="_blank" class="btn-primary">
+          <span data-i18n="open_padlet_external">Open Full Activities Board</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; padding: 1rem; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+        <div style="position:relative;width:100%;height:700px;display:block;box-sizing:border-box">
+          <iframe src="https://padlet.com/embed/s0243imuokbn5661pcvk" frameborder="0" allow="camera;microphone;geolocation" style="width:100%;height:100%;display:block;padding:0;margin:0;border-radius:12px;border:none;"></iframe>
+        </div>
+      </div>
+    </section>
+
     <!-- TAB 5: OUTCOMES -->
     <section id="tab-outcomes" class="page-section">
       <div class="section-title">
@@ -1509,6 +1530,7 @@
         nav_about: "About",
         nav_partners: "Partners",
         nav_roadmap: "Roadmap",
+        nav_activities: "Activities",
         nav_outcomes: "Outcomes",
         nav_blog: "Student Blog",
         nav_esafety: "eSafety",
@@ -1517,6 +1539,7 @@
         home_hero_title: "Uncovering Tomorrow in Yesterday's Tech",
         home_hero_p: "Welcome to the official portal of <strong>Tech-Archaeology</strong>. An international eTwinning initiative connecting students across Europe to dissect obsolete technology, investigate electronic waste, and co-create circular solutions.",
         cta_roadmap: "Explore Roadmap",
+        cta_activities: "Project Activities",
         cta_blog: "Student Blog & Forum",
         stat1_num: "4 Months",
         stat1_txt: "Active Collaboration",
@@ -1598,6 +1621,9 @@
         m4_title: "Virtual Gallery & Local Impact",
         m4_desc: "Curating an interactive 3D virtual exhibition to showcase student projects, paired with a concrete school-wide e-waste collection campaign.",
         m4_t1: "E-Waste Drive",
+        activities_title: "Project Activities & Actions",
+        activities_subtitle: "Documenting workshops, teardown sessions, and student actions in real-time",
+        open_padlet_external: "Open Full Activities Board",
         outcomes_title: "Collaborative Outcomes & Products",
         outcomes_subtitle: "Tangible results co-created by transnational student teams",
         out1_title: "3D Virtual Museum & Gallery",
@@ -1636,6 +1662,7 @@
         nav_about: "Hakkında",
         nav_partners: "Ortaklar",
         nav_roadmap: "Yol Haritası",
+        nav_activities: "Aktiviteler",
         nav_outcomes: "Çıktılar",
         nav_blog: "Öğrenci Blog",
         nav_esafety: "e-Güvenlik",
@@ -1644,6 +1671,7 @@
         home_hero_title: "Dünün Teknolojisinde Yarını Keşfetmek",
         home_hero_p: "<strong>Tech-Archaeology</strong> resmi web portalına hoş geldiniz. Avrupa genelindeki öğrencileri eski donanımları demonte etmeye, e-atıkları araştırmaya ve döngüsel çözümler üretmeye teşvik eden uluslararası bir eTwinning girişimi.",
         cta_roadmap: "Yol Haritasını İncele",
+        cta_activities: "Proje Aktiviteleri",
         cta_blog: "Öğrenci Blog ve Forumu",
         stat1_num: "4 Ay",
         stat1_txt: "Aktif İş Birliği",
@@ -1725,6 +1753,9 @@
         m4_title: "Sanal Galeri ve Yerel Etki",
         m4_desc: "Öğrenci üretimlerinin sergilendiği etkileşimli bir 3D sanal sergi açılır ve okullar arası somut e-atık toplama kampanyası yürütülür.",
         m4_t1: "E-Atık Kampanyası",
+        activities_title: "Proje Aktiviteleri ve Eylemleri",
+        activities_subtitle: "Atölyeleri, söküm çalışmalarını ve öğrenci eylemlerini anlık olarak belgeler",
+        open_padlet_external: "Etkinlik Panosunu Yeni Sekmede Aç",
         outcomes_title: "İş Birlikçi Çıktılar ve Ortak Ürünler",
         outcomes_subtitle: "Uluslararası öğrenci takımlarının birlikte ürettiği somut sonuçlar",
         out1_title: "3D Sanal Müze ve Galeri",
